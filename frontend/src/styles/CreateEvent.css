@@ -1,0 +1,50 @@
+.create-event-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 16px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+.create-event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.create-event-form input {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.create-event-form button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #43cea2;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.create-event-form button:hover {
+  background-color: #185a9d;
+}
+
+.back-btn {
+  margin-top: 20px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: #999;
+  cursor: pointer;
+  color: #fff;
+}

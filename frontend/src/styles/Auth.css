@@ -1,0 +1,90 @@
+/* Auth Page - Login & Register Styling */
+
+.auth-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: "Poppins", sans-serif;
+}
+
+.auth-card {
+  background: rgba(0, 0, 0, 0.3); /* Darker semi-transparent card */
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 40px 50px;
+  width: 380px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  color: #fff; /* White text for visibility */
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.auth-card:hover {
+  transform: translateY(-5px);
+}
+
+.auth-card h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #fff; /* Ensure heading is white */
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-form input {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.5); /* subtle border */
+  outline: none;
+  background: rgba(255, 255, 255, 0.1); /* light transparent input */
+  color: #fff; /* input text white */
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.auth-form input::placeholder {
+  color: rgba(255, 255, 255, 0.7); /* placeholder visible */
+}
+
+.auth-form input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 8px rgba(255,255,255,0.4);
+  border: 1px solid #fff;
+}
+
+.auth-btn {
+  margin-top: 10px;
+  padding: 12px 0;
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.auth-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.auth-footer {
+  margin-top: 20px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.auth-footer a {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 500;
+}
