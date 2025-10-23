@@ -8,13 +8,15 @@ const BookPayment = () => {
   const [success, setSuccess] = useState("");
   const token = localStorage.getItem("token");
 
+  const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
   // Fetch all events
   useEffect(() => {
     const fetchEvents = async () => {
       setLoading(true);
       setError("");
       try {
-        const res = await fetch("http://localhost:5000/api/events", {
+        const res = await fetch(`${BASE_URL}/api/events`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -31,13 +33,13 @@ const BookPayment = () => {
       }
     };
     if (token) fetchEvents();
-  }, [token]);
+  }, [token, BASE_URL]);
 
   const handleBook = async (eventId) => {
     setSuccess("");
     setError("");
     try {
-      const res = await fetch("http://localhost:5000/api/payments/book", {
+      const res = await fetch(`${BASE_URL}/api/payments/book`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

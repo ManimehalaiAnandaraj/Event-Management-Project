@@ -5,12 +5,14 @@ import "../styles/Dashboard.css";
 const Dashboard = () => {
   const [events, setEvents] = useState([]);
   const navigate = useNavigate();
-
   const token = localStorage.getItem("token");
+
+  // Dynamic backend URL
+  const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
   const fetchEvents = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/events", {
+      const res = await fetch(`${BASE_URL}/api/events`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Failed to fetch events");
@@ -22,9 +24,8 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-  fetchEvents();
-}, [token]); // include token dependency
-
+    fetchEvents();
+  }, [token]); // include token dependency
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -46,13 +47,17 @@ const Dashboard = () => {
       <div className="dashboard-container">
         <h1>All Events</h1>
         <div className="event-list">
-          {events.length === 0 ? "No events yet" : events.map(e => (
-            <div className="event-card" key={e._id}>
-              <h3>{e.title}</h3>
-              <p>📅 {new Date(e.date).toLocaleString()}</p>
-              <p>📍 {e.location}</p>
-            </div>
-          ))}
+          {events.length === 0 ? (
+            "No events yet"
+          ) : (
+            events.map((e) => (
+              <div className="event-card" key={e._id}>
+                <h3>{e.title}</h3>
+                <p>📅 {new Date(e.date).toLocaleString()}</p>
+                <p>📍 {e.location}</p>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </>

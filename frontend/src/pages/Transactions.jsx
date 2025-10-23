@@ -12,10 +12,13 @@ const Transactions = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
+  // Dynamic backend URL
+  const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
   // Fetch transactions
   const fetchTransactions = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/transactions", {
+      const res = await fetch(`${BASE_URL}/api/transactions`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -28,7 +31,7 @@ const Transactions = () => {
   // Fetch events for booking
   const fetchEvents = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/events", {
+      const res = await fetch(`${BASE_URL}/api/events`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -48,7 +51,7 @@ const Transactions = () => {
     e.preventDefault();
     if (!eventId || !amount) return;
     try {
-      const res = await fetch("http://localhost:5000/api/transactions/create", {
+      const res = await fetch(`${BASE_URL}/api/transactions/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +72,7 @@ const Transactions = () => {
   // Delete transaction
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/transactions/${id}`, {
+      await fetch(`${BASE_URL}/api/transactions/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -88,7 +91,7 @@ const Transactions = () => {
   // Save edited transaction
   const handleSave = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/transactions/${id}`, {
+      await fetch(`${BASE_URL}/api/transactions/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

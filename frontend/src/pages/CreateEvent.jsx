@@ -9,10 +9,13 @@ const CreateEvent = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
+  // Dynamic backend URL
+  const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/events/create", {
+      const res = await fetch(`${BASE_URL}/api/events/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
