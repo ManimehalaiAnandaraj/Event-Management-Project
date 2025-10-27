@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Transaction from "../models/Transaction.js";
 
 export const getTransactions = async (req, res) => {
@@ -38,14 +39,30 @@ export const updateTransaction = async (req, res) => {
   }
 };
 
+
 export const deleteTransaction = async (req, res) => {
   try {
-    const transaction = await Transaction.findById(req.params.id);
-    if (!transaction) return res.status(404).json({ message: "Transaction not found" });
+    const { id } = req.params;
 
-    await transaction.remove();
-    res.json({ message: "Transaction deleted" });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid transaction ID" });
+    }
+
+    const transaction = await Transaction.findById(id);
+    if (!transaction) {
+      return res.status(404).json({ message: "Transaction not found" });
+    }
+
+    if (transaction.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "Not authorized to delete this transaction" });
+    }
+
+    // ✅ Correct method — no remove(), use deleteOne()
+    await transaction.deleteOne();
+
+    res.status(200).json({ message: "Transaction deleted successfully" });
+  } catch (error) {
+    console.error("❌ Error deleting transaction:", error);
+    res.status(500).json({ message: error.message });
   }
 };

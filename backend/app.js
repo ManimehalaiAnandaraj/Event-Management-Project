@@ -24,4 +24,11 @@ app.get("/", (req, res) => {
   res.send("Event Management API is running!");
 });
 
+// Global error logger (for debugging)
+app.use((err, req, res, next) => {
+  console.error("🔥 SERVER ERROR:", err.stack || err);
+  res.status(500).json({ message: "Internal Server Error", error: err.message });
+});
+
+
 export default app;
